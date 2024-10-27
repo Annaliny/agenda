@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Agenda {
+public class Agenda implements AgendaInterface {
 
     private Map<String, Contato> contatos;
     private GravadorDeDados gravador;
@@ -16,6 +16,7 @@ public class Agenda {
         this.gravador = new GravadorDeDados(contatos, nomeArquivoTxt);
     }
 
+    @Override
     public void adicionarContato(Contato contato) {
         if (contatos.containsKey(contato.getNome())) {
             System.out.println("Contato já existe com o nome: " + contato.getNome());
@@ -25,6 +26,7 @@ public class Agenda {
         }
     }
 
+    @Override
     public void removerContato(String nome) throws ContatoInexistenteException {
         if (contatos.containsKey(nome)) {
             contatos.remove(nome);
@@ -34,6 +36,7 @@ public class Agenda {
         }
     }
 
+    @Override
     public Collection<Contato> pesquisaAniversariantes(int dia, int mes) {
         Collection<Contato> resultado = new ArrayList<>();
         for (Contato contato : contatos.values()) {
@@ -44,14 +47,17 @@ public class Agenda {
         return resultado;
     }
 
+    @Override
     public void salvarDados() throws IOException {
         gravador.salvarDados();
     }
 
+    @Override
     public void recuperarDados() throws IOException {
         gravador.recuperarDados();
     }
 
+    @Override
     public Map<String, Contato> getContatos() {
         return contatos;
     }

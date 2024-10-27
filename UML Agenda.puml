@@ -1,0 +1,70 @@
+@startuml
+interface ufpb.com.br.AgendaInterface {
+~ void adicionarContato(Contato)
+~ void removerContato(String)
+~ Collection<Contato> pesquisaAniversariantes(int,int)
+~ void salvarDados()
+~ void recuperarDados()
+~ Map<String,Contato> getContatos()
+}
+
+class ufpb.com.br.Agenda {
+- Map<String,Contato> contatos
+- GravadorDeDados gravador
++ void adicionarContato(Contato)
++ void removerContato(String)
++ Collection<Contato> pesquisaAniversariantes(int,int)
++ void salvarDados()
++ void recuperarDados()
++ Map<String,Contato> getContatos()
+}
+
+
+class ufpb.com.br.Contato {
+- {static} long serialVersionUID
+- String nome
+- int diaAniversario
+- int mesAniversario
++ String getNome()
++ int getDiaAniversario()
++ int getMesAniversario()
++ void setNome(String)
++ void setDiaAniversario(int)
++ void setMesAniversario(int)
++ String toString()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class ufpb.com.br.GravadorDeDados {
+- Map<String,Contato> contatos
+- String nomeArquivoTxt
++ void salvarDados()
++ void recuperarDados()
++ Map<String,Contato> getContatos()
+}
+
+class ufpb.com.br.ContatoInexistenteException {
+}
+class ufpb.com.br.JanelaPrincipal {
+- AgendaInterface agenda
+- JTextField nomeField
+- JTextField diaField
+- JTextField mesField
+- JTextArea outputArea
+- void initComponents()
++ {static} void main(String[])
+}
+
+
+ufpb.com.br.AgendaInterface <|.. ufpb.com.br.Agenda
+ufpb.com.br.Agenda <|-- ufpb.com.br.ContatoInexistenteException
+ufpb.com.br.JanelaPrincipal o-- ufpb.com.br.AgendaInterface
+ufpb.com.br.AgendaInterface o-- ufpb.com.br.GravadorDeDados
+ufpb.com.br.GravadorDeDados .. ufpb.com.br.Contato
+ufpb.com.br.Agenda .. ufpb.com.br.Contato
+ufpb.com.br.JanelaPrincipal .. ufpb.com.br.Contato
+
+
+@enduml

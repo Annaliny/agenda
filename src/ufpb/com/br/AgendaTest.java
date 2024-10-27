@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AgendaTest {
 
-    private Agenda agenda;
+    private AgendaInterface agenda;
     private final String nomeArquivoTxt = "contatos.txt";
 
     @BeforeEach
@@ -46,7 +46,7 @@ class AgendaTest {
 
         // Verifica se o contato foi recuperado corretamente
         assertEquals(1, novaAgenda.getContatos().size(), "Deveria recuperar 1 contato");
-        assertNotNull(novaAgenda.getContatos().get("Pessoa 01"), "Contato 'Michael' deve existir na nova agenda");
+        assertNotNull(novaAgenda.getContatos().get("Pessoa 01"), "Contato 'Pessoa 01' deve existir na nova agenda");
     }
 
     @Test
